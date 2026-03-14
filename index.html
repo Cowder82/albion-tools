@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Albion Econ Lab | Herramientas de Comercio</title>
+    
+    <style>
+        body { background-color: #121212; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; line-height: 1.6; }
+        .calc-container { background: #1e1e1e; border: 2px solid #c9a050; padding: 25px; border-radius: 12px; max-width: 320px; margin: 20px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+        h1 { color: #c9a050; text-transform: uppercase; font-size: 1.5em; letter-spacing: 2px; margin-bottom: 5px; }
+        
+        /* Optimización para evitar selecciones accidentales en móvil */
+        button { 
+            user-select: none; 
+            -webkit-user-select: none; 
+            touch-action: manipulation;
+            padding: 15px; background: #2a2a2a; color: #fff; border: 1px solid #c9a050; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1.1em; transition: 0.1s; 
+        }
+        
+        input { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #333; background: #000; color: #fff; text-align: right; font-size: 1.5em; box-sizing: border-box; }
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        button:active { background: #c9a050; color: #1a1a1a; transform: scale(0.95); }
+        .btn-equal { background: #c9a050; color: #1a1a1a; grid-column: span 2; }
+        .btn-clear { background: #6b1d1d; color: #fff; grid-column: span 2; border: 1px solid #ff4d4d; }
+        
+        .content-section { max-width: 600px; margin: 30px auto; text-align: left; background: #1e1e1e; padding: 20px; border-radius: 8px; border-left: 4px solid #c9a050; font-size: 0.9em; }
+        h2 { color: #c9a050; font-size: 1.1em; margin-top: 0; }
+        footer { margin-top: 40px; font-size: 0.75em; color: #666; border-top: 1px solid #333; padding-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h1>Albion Econ Lab</h1>
+    <p style="font-size: 0.9em; color: #aaa;">Cálculos de Logística y Mercados</p>
+
+    <div class="calc-container">
+        <input type="text" id="display" readonly placeholder="0">
+        <div class="grid">
+            <button onclick="add('/')">/</button>
+            <button onclick="add('*')">x</button>
+            <button onclick="add('-')">-</button>
+            <button onclick="add('+')">+</button>
+            
+            <button onclick="add('7')">7</button>
+            <button onclick="add('8')">8</button>
+            <button onclick="add('9')">9</button>
+            <button onclick="clearDisplay()" class="btn-clear">C</button>
+            
+            <button onclick="add('4')">4</button>
+            <button onclick="add('5')">5</button>
+            <button onclick="add('6')">6</button>
+            
+            <button onclick="add('1')">1</button>
+            <button onclick="add('2')">2</button>
+            <button onclick="add('3')">3</button>
+            
+            <button onclick="add('0')">0</button>
+            <button onclick="add('.')">.</button>
+            <button onclick="solve()" class="btn-equal">=</button>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2>Manual de Arbitraje de Plata</h2>
+        <p>Optimiza tus beneficios calculando impuestos de mercado y costos de transporte. Esta herramienta está diseñada para el análisis de riesgo en la economía de Albion Online.</p>
+    </div>
+
+    <footer>
+        <p>Contacto: cowder82@outlook.com</p>
+        <p>© 2026 Albion Econ Lab | Finanzas Virtuales</p>
+    </footer>
+
+    <script>
+        const display = document.getElementById('display');
+        function add(v) { 
+            if(display.value === '0' || display.value === 'Error') display.value = '';
+            display.value += v; 
+        }
+        function clearDisplay() { display.value = ''; }
+        function solve() {
+            try { 
+                // Operación básica de cálculo
+                let result = eval(display.value);
+                display.value = Number.isInteger(result) ? result : result.toFixed(2);
+            }
+            catch (e) { display.value = 'Error'; setTimeout(clearDisplay, 1000); }
+        }
+    </script>
+
+</body>
+</html>
+
